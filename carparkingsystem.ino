@@ -1,4 +1,4 @@
-// Created by Simple Circuits  
+
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h> 
@@ -8,23 +8,21 @@ Servo myservo;
 
 const int IR1 = 2;
 const int IR2 = 3;
-const int TOTAL_SLOTS = 4;  // Define the total number of parking slots
-int Slot = TOTAL_SLOTS;      // Initialize available slots
-
+const int TOTAL_SLOTS = 4;
+int Slot = TOTAL_SLOTS;      
 int flag1 = 0;
 int flag2 = 0;
 
 void setup() {
     Serial.begin(9600); 
 
-    lcd.begin(); // Initialize the LCD
-    lcd.backlight(); // Turn on backlight
-
+    lcd.begin(); 
+    lcd.backlight(); 
     pinMode(IR1, INPUT);
     pinMode(IR2, INPUT);
 
     myservo.attach(4);
-    myservo.write(100); // Set servo to initial position
+    myservo.write(100); 
 
     lcd.setCursor(0, 0);
     lcd.print("     ARDUINO    ");
@@ -55,7 +53,7 @@ void loop() {
     if (digitalRead(IR2) == LOW && flag2 == 0) {
         flag2 = 1;
         if (flag1 == 0) { 
-            if (Slot < TOTAL_SLOTS) {  // Ensure Slot doesn't exceed TOTAL_SLOTS
+            if (Slot < TOTAL_SLOTS) {  
                 myservo.write(0); 
                 Slot++;  
             }
